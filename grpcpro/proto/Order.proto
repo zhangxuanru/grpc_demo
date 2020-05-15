@@ -1,0 +1,23 @@
+syntax = "proto3";
+package pbfiles;
+option go_package = ".;pbfiles";
+import "module/Order.Module.proto";
+import "google/api/annotations.proto";
+
+message OrderNewRequest{
+    OrderMain order_main =1;
+};
+
+message OrderNewResp{
+    string status=1;
+    string message=2;
+};
+//订单服务
+service OrderService{
+    rpc NewOrder(OrderNewRequest) returns(OrderNewResp){
+        option(google.api.http) = {
+                 post:"/v1/orderNew"
+                 body:"order_main"
+        };
+    };
+};

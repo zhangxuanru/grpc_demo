@@ -1,0 +1,10 @@
+syntax = "proto3";
+package pbfiles;
+option go_package = ".;pbfiles";
+
+//外部proto，定义prod Model
+message ProdModel{
+  int32  prod_id =1;
+  string prod_name=2;
+  float  prod_price=3;
+};

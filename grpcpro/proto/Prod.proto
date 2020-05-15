@@ -1,0 +1,55 @@
+syntax = "proto3";
+package pbfiles;
+option go_package = ".;pbfiles";
+import "google/api/annotations.proto";
+import "module/Prod.Module.proto";
+
+//枚举
+enum ProdArea{
+    A=0;
+    B=1;
+    C=2;
+};
+
+message ProdRequest {
+    int32 prod_id = 1;
+    ProdArea area=2;
+};
+
+message ProdResponse{
+   int32 prod_stock=1;
+};
+
+
+//---
+message ProdListRequest{
+    int32 size = 1;
+};
+
+message ProdList{
+      int32 prod_id =1;
+      string prod_name =2;
+      bool is_subsidy = 3;
+      int32 is_integral = 4;
+      float price =5;
+};
+//返回数组
+message ProdListResponse {
+    repeated  ProdList  prodList=1;
+};
+//----
+
+
+service ProdService {
+   rpc GetProdStock(ProdRequest) returns (ProdResponse){
+       option (google.api.http) = {
+          get :"/v1/product/stock/{prod_id}"
+       };
+   };
+   rpc GetProdList(ProdListRequest) returns (ProdListResponse){
+       option (google.api.http) = {
+           get: "/v1/product/list/{size}"
+       };
+   };
+   rpc GetProdInfo(ProdRequest) returns(ProdModel){}; //引用外部proto
+};
