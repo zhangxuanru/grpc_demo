@@ -32,11 +32,12 @@ type OrderMain struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OrderId    int32                `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	OrderNo    string               `protobuf:"bytes,2,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`
-	UserId     int32                `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OrderMoney float32              `protobuf:"fixed32,4,opt,name=order_money,json=orderMoney,proto3" json:"order_money,omitempty"`
-	OrderTime  *timestamp.Timestamp `protobuf:"bytes,5,opt,name=order_time,json=orderTime,proto3" json:"order_time,omitempty"`
+	OrderId      int32                `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	OrderNo      string               `protobuf:"bytes,2,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`
+	UserId       int32                `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	OrderMoney   float32              `protobuf:"fixed32,4,opt,name=order_money,json=orderMoney,proto3" json:"order_money,omitempty"`
+	OrderTime    *timestamp.Timestamp `protobuf:"bytes,5,opt,name=order_time,json=orderTime,proto3" json:"order_time,omitempty"`
+	OrderDetails []*OrderDetail       `protobuf:"bytes,6,rep,name=order_details,json=orderDetails,proto3" json:"order_details,omitempty"`
 }
 
 func (x *OrderMain) Reset() {
@@ -106,6 +107,85 @@ func (x *OrderMain) GetOrderTime() *timestamp.Timestamp {
 	return nil
 }
 
+func (x *OrderMain) GetOrderDetails() []*OrderDetail {
+	if x != nil {
+		return x.OrderDetails
+	}
+	return nil
+}
+
+//子订单
+type OrderDetail struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	GoodsId   int32  `protobuf:"varint,1,opt,name=goods_id,json=goodsId,proto3" json:"goods_id,omitempty"`
+	GoodsNum  int32  `protobuf:"varint,2,opt,name=goods_num,json=goodsNum,proto3" json:"goods_num,omitempty"`
+	GoodsName string `protobuf:"bytes,3,opt,name=goods_name,json=goodsName,proto3" json:"goods_name,omitempty"`
+	OrderNo   string `protobuf:"bytes,4,opt,name=order_no,json=orderNo,proto3" json:"order_no,omitempty"`
+}
+
+func (x *OrderDetail) Reset() {
+	*x = OrderDetail{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_module_Order_Module_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *OrderDetail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OrderDetail) ProtoMessage() {}
+
+func (x *OrderDetail) ProtoReflect() protoreflect.Message {
+	mi := &file_module_Order_Module_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OrderDetail.ProtoReflect.Descriptor instead.
+func (*OrderDetail) Descriptor() ([]byte, []int) {
+	return file_module_Order_Module_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *OrderDetail) GetGoodsId() int32 {
+	if x != nil {
+		return x.GoodsId
+	}
+	return 0
+}
+
+func (x *OrderDetail) GetGoodsNum() int32 {
+	if x != nil {
+		return x.GoodsNum
+	}
+	return 0
+}
+
+func (x *OrderDetail) GetGoodsName() string {
+	if x != nil {
+		return x.GoodsName
+	}
+	return ""
+}
+
+func (x *OrderDetail) GetOrderNo() string {
+	if x != nil {
+		return x.OrderNo
+	}
+	return ""
+}
+
 var File_module_Order_Module_proto protoreflect.FileDescriptor
 
 var file_module_Order_Module_proto_rawDesc = []byte{
@@ -113,7 +193,7 @@ var file_module_Order_Module_proto_rawDesc = []byte{
 	0x6f, 0x64, 0x75, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x07, 0x70, 0x62, 0x66,
 	0x69, 0x6c, 0x65, 0x73, 0x1a, 0x1f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xb6, 0x01, 0x0a, 0x09, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x4d,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xf1, 0x01, 0x0a, 0x09, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x4d,
 	0x61, 0x69, 0x6e, 0x12, 0x19, 0x0a, 0x08, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18,
 	0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x07, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x64, 0x12, 0x19,
 	0x0a, 0x08, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x6e, 0x6f, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
@@ -124,9 +204,20 @@ var file_module_Order_Module_proto_rawDesc = []byte{
 	0x6e, 0x65, 0x79, 0x12, 0x39, 0x0a, 0x0a, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x74, 0x69, 0x6d,
 	0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74,
-	0x61, 0x6d, 0x70, 0x52, 0x09, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x54, 0x69, 0x6d, 0x65, 0x42, 0x0b,
-	0x5a, 0x09, 0x2e, 0x3b, 0x70, 0x62, 0x66, 0x69, 0x6c, 0x65, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x61, 0x6d, 0x70, 0x52, 0x09, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x39,
+	0x0a, 0x0d, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x64, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x18,
+	0x06, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x70, 0x62, 0x66, 0x69, 0x6c, 0x65, 0x73, 0x2e,
+	0x4f, 0x72, 0x64, 0x65, 0x72, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x52, 0x0c, 0x6f, 0x72, 0x64,
+	0x65, 0x72, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x22, 0x7f, 0x0a, 0x0b, 0x4f, 0x72, 0x64,
+	0x65, 0x72, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x12, 0x19, 0x0a, 0x08, 0x67, 0x6f, 0x6f, 0x64,
+	0x73, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x07, 0x67, 0x6f, 0x6f, 0x64,
+	0x73, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x67, 0x6f, 0x6f, 0x64, 0x73, 0x5f, 0x6e, 0x75, 0x6d,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x67, 0x6f, 0x6f, 0x64, 0x73, 0x4e, 0x75, 0x6d,
+	0x12, 0x1d, 0x0a, 0x0a, 0x67, 0x6f, 0x6f, 0x64, 0x73, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x67, 0x6f, 0x6f, 0x64, 0x73, 0x4e, 0x61, 0x6d, 0x65, 0x12,
+	0x19, 0x0a, 0x08, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x6e, 0x6f, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x07, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x4e, 0x6f, 0x42, 0x0b, 0x5a, 0x09, 0x2e, 0x3b,
+	0x70, 0x62, 0x66, 0x69, 0x6c, 0x65, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -141,18 +232,20 @@ func file_module_Order_Module_proto_rawDescGZIP() []byte {
 	return file_module_Order_Module_proto_rawDescData
 }
 
-var file_module_Order_Module_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_module_Order_Module_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_module_Order_Module_proto_goTypes = []interface{}{
 	(*OrderMain)(nil),           // 0: pbfiles.OrderMain
-	(*timestamp.Timestamp)(nil), // 1: google.protobuf.Timestamp
+	(*OrderDetail)(nil),         // 1: pbfiles.OrderDetail
+	(*timestamp.Timestamp)(nil), // 2: google.protobuf.Timestamp
 }
 var file_module_Order_Module_proto_depIdxs = []int32{
-	1, // 0: pbfiles.OrderMain.order_time:type_name -> google.protobuf.Timestamp
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 0: pbfiles.OrderMain.order_time:type_name -> google.protobuf.Timestamp
+	1, // 1: pbfiles.OrderMain.order_details:type_name -> pbfiles.OrderDetail
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_module_Order_Module_proto_init() }
@@ -173,6 +266,18 @@ func file_module_Order_Module_proto_init() {
 				return nil
 			}
 		}
+		file_module_Order_Module_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*OrderDetail); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -180,7 +285,7 @@ func file_module_Order_Module_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_module_Order_Module_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

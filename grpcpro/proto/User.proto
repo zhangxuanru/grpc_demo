@@ -1,0 +1,20 @@
+syntax = "proto3";
+package pbfiles;
+option go_package = ".;pbfiles";
+import "module/User.Module.proto";
+
+message UserScoreRequest{
+    repeated UserInfo users =1;
+};
+
+message UserScoreResponse{
+   repeated UserInfo users=1;
+};
+
+service UserService{
+   rpc GetUserScore(UserScoreRequest) returns(UserScoreResponse){};
+   rpc GetUserScoreByServerStream(UserScoreRequest) returns (stream UserScoreResponse){};  //服务端流
+   rpc GetUserScoreByClientStream(stream UserScoreRequest) returns (UserScoreResponse){}; //客户端流
+   rpc GetUserScoreTNS(stream UserScoreRequest) returns (stream UserScoreResponse){};     //双向流
+
+};

@@ -35,6 +35,7 @@ func main() {
 	rpcServer := grpc.NewServer(grpc.Creds(creds))
 	pbfiles.RegisterProdServiceServer(rpcServer, new(services.ProdService))
 	pbfiles.RegisterOrderServiceServer(rpcServer, new(services.Order))
+	pbfiles.RegisterUserServiceServer(rpcServer, new(services.User))
 	listener, _ := net.Listen("tcp", ":8081")
 	if e := rpcServer.Serve(listener); e != nil {
 		log.Fatal(e)
