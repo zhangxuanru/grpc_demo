@@ -11,12 +11,15 @@ require (
 	github.com/creack/pty v1.1.10 // indirect
 	github.com/envoyproxy/go-control-plane v0.9.5 // indirect
 	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20200420212212-258d9bec320e // indirect
+	github.com/go-kit/kit v0.10.0
 	github.com/golang/protobuf v1.4.1
 	github.com/google/pprof v0.0.0-20200507031123-427632fa3b1c // indirect
+	github.com/gorilla/mux v1.7.4
 	github.com/grpc-ecosystem/grpc-gateway v1.14.5
 	github.com/ianlancetaylor/demangle v0.0.0-20200414190113-039b1ae3a340 // indirect
 	github.com/kr/pretty v0.2.0 // indirect
 	github.com/kr/text v0.2.0 // indirect
+	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/prometheus/client_model v0.2.0 // indirect
 	github.com/rogpeppe/go-internal v1.6.0 // indirect
 	github.com/stretchr/objx v0.2.0 // indirect

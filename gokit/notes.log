@@ -1,0 +1,9 @@
+下载go-kit:
+       go get -u github.com/go-kit/kit
+       go get   github.com/go-kit/kit
+
+路由包：
+    go get -u github.com/gorilla/mux
+
+
+
