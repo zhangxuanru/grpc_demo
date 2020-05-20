@@ -6,4 +6,12 @@
     go get -u github.com/gorilla/mux
 
 
+限流:
+    go get  golang.org/x/time/rate
 
+
+熔断器:
+    go get github.com/afex/hystrix-go
+
+jwt:
+    go get github.com/dgrijalva/jwt-go
