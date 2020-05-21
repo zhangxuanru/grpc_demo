@@ -15,6 +15,7 @@ import (
 	"io/ioutil"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/dgrijalva/jwt-go"
 )
@@ -81,6 +82,37 @@ func TestJwt2(t *testing.T) {
 	} else {
 		fmt.Println("token error......")
 	}
+}
+
+//设置token过期时间
+func TestJwt3(t *testing.T) {
+	secKey := []byte("zxr_good")
+	user := UserInfo{
+		UserName: "zxr",
+	}
+	//设置过期时间
+	user.ExpiresAt = time.Now().Add(time.Second * 5).Unix()
+
+	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, user)
+	token, _ := claims.SignedString(secKey)
+	fmt.Println(token)
+
+	i := 0
+	for {
+		u := &UserInfo{}
+		withClaims, _ := jwt.ParseWithClaims(token, u, func(token *jwt.Token) (i interface{}, e error) {
+			return secKey, nil
+		})
+
+		if withClaims.Valid {
+			fmt.Println(i, "----", withClaims.Claims)
+		} else {
+			fmt.Println("token error....")
+		}
+		i++
+		time.Sleep(1 * time.Second)
+	}
+
 }
 
 //生成公钥私钥文件
